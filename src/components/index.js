@@ -1,3 +1,4 @@
 import ProductItem from "./ProductItem";
+import Filter from "./Filter";
 
-export { ProductItem }
+export { ProductItem, Filter }
