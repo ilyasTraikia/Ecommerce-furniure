@@ -1,19 +1,68 @@
 import React, { useEffect, useState } from 'react'
 import { shopBackground,Syltherine,shipping,support,trophy,warranty } from '../assets'
 import { Filter,ProductItem } from '../components'
-import { products2 } from '../data/products'
+import { useLocation,useNavigate} from "react-router-dom";
+import useAxiosPrivate from '../custom hooks/useAxiosPrivate';
+
+
+
+
+
+
+
+
+
 
 export default function Shop() {
+
+
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   
-  // states and variables declaration
-  const [products,setProducts] = useState(products2)
+
+
+
+  useEffect(() => {
+
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getProducts = async () => {
+        try {
+     
+            const response = await axiosPrivate.get('/api/products', {
+                signal: controller.signal
+            });
+    
+            isMounted && setProductsData(response.data);
+            isMounted && setProducts(response.data);
+        } catch (err) {
+            console.error(err);
+            navigate('/login', { state: { from: location }, replace: true });
+        }
+    }
+
+    getProducts();
+
+    return () => {
+      isMounted = false
+      isMounted && controller.abort()
+    }
+}, [])
+
+
+  const [productsData, setProductsData] = useState([{}]);
+  const [products,setProducts] = useState(productsData)
+
+
   const [currentPage,setCurrentPage] = useState(1)
   const NumberOfProductsPerPage = 8
-  const numberOfPages = Math.round(products2.length / NumberOfProductsPerPage)
+  const numberOfPages = Math.ceil(productsData.length / NumberOfProductsPerPage)
   const pages = Array.from({length: numberOfPages}, (_, i) => i + 1)
 
-  console.log(currentPage)
-  console.log(pages)
+
 
 
  // useEffect hook to initialize the array to display the first elements of the page
@@ -26,7 +75,7 @@ export default function Shop() {
   // a function to handle slicing the array based on the number that was clicked on in the pagination
   const handlePaginationClick = (e,element)=> {
     setCurrentPage(element)
-    setProducts(products2.slice(  (element*NumberOfProductsPerPage - NumberOfProductsPerPage)   ,  (  element * NumberOfProductsPerPage )))
+    setProducts(productsData.slice(  (element*NumberOfProductsPerPage - NumberOfProductsPerPage)   ,  (  element * NumberOfProductsPerPage )))
   }
 
 
@@ -59,9 +108,11 @@ export default function Shop() {
            <ul className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-4">
  
             {  
-              products.map((element)=> {
+              products.map((element,index)=> {
+          
+            
                 return (
-                 <ProductItem image = {Syltherine} title = {element.title} category = {element.category} price = {element.price} />
+                <div key={index}><ProductItem   product={element} /></div>
                 )
               })    
             }
@@ -98,12 +149,12 @@ export default function Shop() {
 
 
             {/* Pagination numbers mapping with a condition rendering to determine when to disable a number */}
-            {pages.map((element)=> {
+            {pages.map((element,index)=> {
               if(element == currentPage) {
 
              
 
-                return(<button disabled  onClick={(e)=> {
+                return(<button disabled key={index}  onClick={(e)=> {
                   handlePaginationClick(e,element)
   
                 }} className="w-10 h-10 bg-onPrimary  disabled:text-gray-300  text-gray-500 hover:text-blue-600 p-4 inline-flex items-center text-sm font-medium rounded-full">{element}</button>)

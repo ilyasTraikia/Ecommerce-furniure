@@ -1,26 +1,30 @@
 const products = [
 
     {
+        id: 16,
         image: '',
-        title: 'Syltherine',
+        name: 'Syltherine',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
+        id: 17,
         image: '',
-        title: 'Leviosa',
+        name: 'Leviosa',
         category: 'Stylish cafe chair',
         price: '40'
     },
     {
+        id: 16,
         image: '',
-        title: 'Lolito',
+        name: 'Lolito',
         category: 'Luxury big sofa',
         price: '100'
     },
     {
+        id: 16,
         image: '',
-        title: 'Respira',
+        name: 'Respira',
         category: 'Outdoor bar table and stool',
         price: '500'
     },
@@ -31,26 +35,30 @@ const products = [
 
 
     {
+        id: 16,
         image: '',
-        title: 'Syltherine',
+        name: 'Syltherine',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
+        id: 16,
         image: '',
-        title: 'Syltherine',
+        name: 'Syltherine',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
+        id: 16,
         image: '',
-        title: 'Syltherine',
+        name: 'Syltherine',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
+        id: 16,
         image: '',
-        title: 'Syltherine',
+        name: 'Syltherine',
         category: 'Stylish cafe chair',
         price: '30'
     }
@@ -77,26 +85,27 @@ const products = [
 const products2 = [
 
     {
+
         image: '',
-        title: 'Syltherine1',
+        name: 'Syltherine1',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
         image: '',
-        title: 'Leviosa2',
+        name: 'Leviosa2',
         category: 'Stylish cafe chair',
         price: '40'
     },
     {
         image: '',
-        title: 'Lolito3',
+        name: 'Lolito3',
         category: 'Luxury big sofa',
         price: '100'
     },
     {
         image: '',
-        title: 'Respira4',
+        name: 'Respira4',
         category: 'Outdoor bar table and stool',
         price: '500'
     },
@@ -108,25 +117,25 @@ const products2 = [
 
     {
         image: '',
-        title: 'Syltherine5',
+        name: 'Syltherine5',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
         image: '',
-        title: 'Syltherine6',
+        name: 'Syltherine6',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
         image: '',
-        title: 'Syltherine7',
+        name: 'Syltherine7',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
         image: '',
-        title: 'Syltherine8',
+        name: 'Syltherine8',
         category: 'Stylish cafe chair',
         price: '30'
     },
@@ -135,25 +144,25 @@ const products2 = [
 
     {
         image: '',
-        title: 'Syltherine9',
+        name: 'Syltherine9',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
         image: '',
-        title: 'Leviosa10',
+        name: 'Leviosa10',
         category: 'Stylish cafe chair',
         price: '40'
     },
     {
         image: '',
-        title: 'Lolito11',
+        name: 'Lolito11',
         category: 'Luxury big sofa',
         price: '100'
     },
     {
         image: '',
-        title: 'Respira12',
+        name: 'Respira12',
         category: 'Outdoor bar table and stool',
         price: '500'
     },
@@ -164,25 +173,25 @@ const products2 = [
 
     {
         image: '',
-        title: 'Syltherine13',
+        name: 'Syltherine13',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
         image: '',
-        title: 'Leviosa14',
+        name: 'Leviosa14',
         category: 'Stylish cafe chair',
         price: '40'
     },
     {
         image: '',
-        title: 'Lolito15',
+        name: 'Lolito15',
         category: 'Luxury big sofa',
         price: '100'
     },
     {
         image: '',
-        title: 'Respira16',
+        name: 'Respira16',
         category: 'Outdoor bar table and stool',
         price: '500'
     },
@@ -192,25 +201,25 @@ const products2 = [
 
     {
         image: '',
-        title: 'Syltherine17',
+        name: 'Syltherine17',
         category: 'Stylish cafe chair',
         price: '30'
     },
     {
         image: '',
-        title: 'Leviosa18',
+        name: 'Leviosa18',
         category: 'Stylish cafe chair',
         price: '40'
     },
     {
         image: '',
-        title: 'Lolito19',
+        name: 'Lolito19',
         category: 'Luxury big sofa',
         price: '100'
     },
     {
         image: '',
-        title: 'Respira20',
+        name: 'Respira20',
         category: 'Outdoor bar table and stool',
         price: '500'
     },
@@ -218,4 +227,122 @@ const products2 = [
 
 
 
-export { products, products2 };
+const products3 = [
+
+
+    {
+        image: '',
+        name: 'Syltherine1',
+        category: 'Stylish cafe chair',
+        price: '30'
+    },
+    {
+        image: '',
+        name: 'Leviosa2',
+        category: 'Stylish cafe chair',
+        price: '40'
+    },
+    {
+        image: '',
+        name: 'Lolito3',
+        category: 'Luxury big sofa',
+        price: '100'
+    },
+    {
+        image: '',
+        name: 'Respira4',
+        category: 'Outdoor bar table and stool',
+        price: '500'
+    },
+
+
+
+
+
+
+    {
+        image: '',
+        name: 'Syltherine5',
+        category: 'Stylish cafe chair',
+        price: '30'
+    },
+    {
+        image: '',
+        name: 'Syltherine6',
+        category: 'Stylish cafe chair',
+        price: '30'
+    },
+    {
+        image: '',
+        name: 'Syltherine7',
+        category: 'Stylish cafe chair',
+        price: '30'
+    },
+    {
+        image: '',
+        name: 'Syltherine8',
+        category: 'Stylish cafe chair',
+        price: '30'
+    },
+
+
+
+    {
+        image: '',
+        name: 'Syltherine9',
+        category: 'Stylish cafe chair',
+        price: '30'
+    },
+    {
+        image: '',
+        name: 'Leviosa10',
+        category: 'Stylish cafe chair',
+        price: '40'
+    },
+    {
+        image: '',
+        name: 'Lolito11',
+        category: 'Luxury big sofa',
+        price: '100'
+    },
+
+]
+
+
+
+
+
+
+const products4 = [{
+        id: 16,
+        image: '',
+        name: 'Syltherine17',
+        category: 'Stylish cafe chair',
+        price: '30'
+    },
+    {
+        id: 16,
+        image: '',
+        name: 'Leviosa18',
+        category: 'Stylish cafe chair',
+        price: '40'
+    },
+    {
+        id: 16,
+        image: '',
+        name: 'Lolito19',
+        category: 'Luxury big sofa',
+        price: '100'
+    },
+    {
+        id: 16,
+        image: '',
+        name: 'Respira20',
+        category: 'Outdoor bar table and stool',
+        price: '500'
+    }
+]
+
+
+
+export { products, products2, products3, products4 };

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <footer className=" border-t border-gray-200  dark:border-gray-600 ">
+    <footer className=" border-t border-gray-200  dark:border-gray-600 dark:bg-gray-800 ">
     <div className="max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
       {/* <!-- Grid --> */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
@@ -28,7 +28,7 @@ export default function Footer() {
         <div className="col-span-1">
           <h4 className="font-semibold text-gray-900  dark:text-gray-100 ">Help</h4>
   
-          <div class="mt-3 grid space-y-3">
+          <div className="mt-3 grid space-y-3">
           <p><a className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="#">Payment Options</a></p>
           <p><a className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="#">Returns</a></p>
           <p><a className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="#">Privacy Policies</a> </p>
@@ -42,8 +42,8 @@ export default function Footer() {
           <form >
             <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white dark:bg-gray-700  rounded-md p-2">
               <div className="w-full">
-                <label for="hero-input" class="sr-only">Search</label>
-                <input type="text" id="hero-input" name="hero-input" class="py-3 dark:bg-gray-700 dark:text-white out px-4  block w-full outline-none border-transparent shadow-sm rounded-md focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter your email" />
+                <label htmlFor="hero-input" className="sr-only">Search</label>
+                <input type="text" id="hero-input" name="hero-input" className="py-3 dark:bg-gray-700 dark:text-white out px-4  block w-full outline-none border-transparent shadow-sm rounded-md focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter your email" />
               </div>
               <a className="w-full sm:w-auto whitespace-nowrap inline-flex justify-center items-center gap-x-3 text-center rounded-md border-2 border-onPrimary font-semibold text-onPrimary hover:text-white hover:bg-onPrimary hover:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 transition-all text-base dark:focus:ring-offset-gray-800 py-3 px-4" href="#">
                 Subscribe

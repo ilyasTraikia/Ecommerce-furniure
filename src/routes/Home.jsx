@@ -66,7 +66,7 @@ export default function Home() {
 
 
       {/* Products section */}
-      <div className='mt-[56px] flex flex-col space-y-8 justify-center items-center pb-12'>
+      <div className='mt-[100px] flex flex-col space-y-8 justify-center items-center pb-12'>
         <p className='text-4xl text-brandGray dark:text-white font-bold'>Our Products</p>
         
 
@@ -74,13 +74,13 @@ export default function Home() {
         {/* Product list */}
         
 
-         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8 ">
+         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-5 lg:px-8 ">
            <ul className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-4">
  
             {  
-              products.map((element)=> {
+              products.map((element,index)=> {
                 return (
-                 <ProductItem image = {Syltherine} title = {element.title} category = {element.category} price = {element.price} />
+                 <ProductItem key={index} product={element} />
                 )
               })    
             }

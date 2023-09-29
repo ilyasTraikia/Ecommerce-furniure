@@ -1,7 +1,6 @@
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import { Login, Signup } from '../routes'
-import Shop from '../routes/Shop'
+import { Outlet } from "react-router-dom";
 
 import './App.css'
 
@@ -15,8 +14,10 @@ function App() {
      <div className='bg-white h-full w-full  dark:bg-gray-800 '>
       
       <Navbar />
-
-      <Shop />
+      
+      <div className='dark:bg-gray-800'>   
+       <Outlet  />
+      </div>
 
       <Footer />
 
