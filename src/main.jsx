@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './app/App'
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 import './index.css'
 import { AuthProdiver } from './context/AuthProvider';
 import { Login, Signup, Home,Shop } from './routes'
@@ -12,6 +13,7 @@ import ProductPage,{loader as ProductLoader} from './routes/ProductPage';
 import {action as registerAction} from './routes/Signup'
 import ErrorElement from './routes/ErrorElement';
 import RequireAuth from './components/RequireAuth';
+import PersistLogin from './components/PersistLogin';
 import('preline')
 
 
@@ -40,14 +42,20 @@ const router = createBrowserRouter([
               ]
       },
       {
-          element : <RequireAuth allowedRoles={['Admin']} />,
-          children : [
-            {
-              path: "/shop",
-              element:<Shop />
-            },
-          ]
+        element : <PersistLogin />,
+        children : [
+          {
+            element : <RequireAuth allowedRoles={['Admin']} />,
+            children : [
+              {
+                path: "/shop",
+                element:<Shop />
+              },
+            ]
+        }
+        ]
       }
+     
     
 
     ]
@@ -73,6 +81,10 @@ const router = createBrowserRouter([
 
 
 
+
+if (process.env.NODE_ENV === 'production') {
+  disableReactDevTools();
+}
 
 
 

@@ -23,8 +23,7 @@ export default function Login() {
   const from = location.state?.from?.pathname || "/"
   
 
-  const [user, setUser] = useState('');
-  const [pwd, setPwd] = useState('');
+
   const [errMsg, setErrMsg] = useState('');
 
 
@@ -56,7 +55,10 @@ export default function Login() {
       const response = await axios.post(`/api/User/login`, {
         username: username,
         password: password
-          })
+          },  {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        })
 
   
   
@@ -66,6 +68,9 @@ export default function Login() {
       
       
         setAuth({ username, password, roles, accessToken });
+        
+        localStorage.setItem("credentials",JSON.stringify({ username, password }))
+        
         SetIsSubmitting(false)
         navigate(from,{replace : true})
     } catch (err) { 
