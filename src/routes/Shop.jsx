@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { shopBackground,Syltherine,shipping,support,trophy,warranty } from '../assets'
 import { Filter,ProductItem } from '../components'
-import { useLocation,useNavigate} from "react-router-dom";
-import useAxiosPrivate from '../custom hooks/useAxiosPrivate';
+import useProducts from '../custom hooks/useProducts';
 
 
 
@@ -16,45 +15,14 @@ import useAxiosPrivate from '../custom hooks/useAxiosPrivate';
 export default function Shop() {
 
 
-  const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
-  const location = useLocation();
+
+  // Getting all products from the custom hook
+  const {   productsData,products,setProducts } = useProducts()
 
   
 
 
 
-  useEffect(() => {
-
-    let isMounted = true;
-    const controller = new AbortController();
-
-    const getProducts = async () => {
-        try {
-     
-            const response = await axiosPrivate.get('/api/products', {
-                signal: controller.signal
-            });
-    
-            isMounted && setProductsData(response.data);
-            isMounted && setProducts(response.data);
-        } catch (err) {
-            console.error(err);
-            navigate('/login', { state: { from: location }, replace: true });
-        }
-    }
-
-    getProducts();
-
-    return () => {
-      isMounted = false
-      isMounted && controller.abort()
-    }
-}, [])
-
-
-  const [productsData, setProductsData] = useState([{}]);
-  const [products,setProducts] = useState(productsData)
 
 
   const [currentPage,setCurrentPage] = useState(1)
@@ -254,15 +222,6 @@ export default function Shop() {
           <div className='font-medium text-xl text-[#898989]'>Dedicated support</div>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
 
      </div>
 

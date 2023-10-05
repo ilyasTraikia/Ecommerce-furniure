@@ -1,9 +1,17 @@
 import React from 'react'
 import { plantBackground,bedroom,dining,livingRoom,Syltherine } from '../assets'
-import { products } from '../data/products'
 import { ProductItem } from '../components'
+import useProducts from '../custom hooks/useProducts'
 
 export default function Home() {
+
+
+  // Getting all the prodocts from the custom hook
+  const { products } = useProducts()
+
+
+
+
   return (
     <div className='relative'>
 
@@ -98,6 +106,8 @@ export default function Home() {
       </div>
 
 
+
+  {/* The OffCanvasCart */}
 
 
     </div>

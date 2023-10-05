@@ -1,22 +1,34 @@
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import { Outlet } from "react-router-dom";
-
+import { Outlet ,useNavigation} from "react-router-dom";
 import './App.css'
+import {Toaster} from 'react-hot-toast'
+import OffCanvasCartRight from '../components/OffCanvasCartRight';
+import { createPortal } from 'react-dom';
+import usePurchase from '../custom hooks/usePurchase';
 
 
 function App() {
-  
+
+  const navigation = useNavigation()
+  const {totalQuantities} = usePurchase()
 
   return (
+
     <>
     
      <div className='bg-white h-full w-full  dark:bg-gray-800 '>
       
-      <Navbar />
-      
+      <Navbar totalQte = {totalQuantities} />
+      <Toaster />
+      {/* The OffCanvasCart */}
+      {createPortal(
+       <OffCanvasCartRight />,
+        document.body
+       )}
+     
       <div className='dark:bg-gray-800'>   
-       <Outlet  />
+       {navigation.state==='loading'? <div className="lds-ring"><div></div><div></div><div></div><div></div></div>:<Outlet/> }
       </div>
 
       <Footer />

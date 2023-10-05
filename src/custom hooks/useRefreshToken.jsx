@@ -6,7 +6,6 @@ const useRefreshToken = () => {
     const credentials = JSON.parse(localStorage.getItem("credentials"))
 
     const refresh = async () => {
-        console.log(`From the refresh function  the username is ${credentials.username}`)
         const response = await axios.post(`/api/User/login`, {
             
             username: credentials.username,

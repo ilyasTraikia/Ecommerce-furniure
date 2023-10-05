@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 @layer components {
     .no-spinner {
         -moz-appearance: textfield;
@@ -12,4 +13,9 @@
         margin: 0;
         -webkit-appearance: none;
     }
+}
+
+
+.badgeIcon {
+    @apply relative inline-flex flex-shrink-0 justify-center items-center h-[3.375rem] w-[1.5rem] rounded-md  font-medium   shadow-sm align-middle    transition-all text-sm
 }

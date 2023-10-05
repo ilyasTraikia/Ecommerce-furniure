@@ -1,9 +1,9 @@
-import React from 'react'
-import { products4 } from '../data/products'
-import { Syltherine } from '../assets'
 import { ProductItem } from '../components'
 import axios from 'axios'
 import { useLoaderData } from 'react-router-dom'
+import useProducts from '../custom hooks/useProducts'
+import usePurchase from '../custom hooks/usePurchase'
+import { useState } from 'react'
 
 
 
@@ -19,7 +19,22 @@ export async function loader({ params }) {
 export default function ProductPage() {
 
   const  product  = useLoaderData().data
+  const { products} = useProducts()
 
+ 
+
+  // Getting the purchase context
+  const { incQty, decQty,qty, onAdd} = usePurchase()
+  
+  // useEffect(() => {
+    
+  //   if(Quantity == 0) {
+
+  //   }
+  
+   
+  // }, [Quantity])
+  
 
 
 
@@ -132,32 +147,60 @@ export default function ProductPage() {
         <div>
           <label htmlFor="Quantity" className="sr-only dark:text-white"> Quantity </label>
 
-          <div className="flex items-center border border-gray-200 rounded">
+          <div className="flex items-center border border-gray-200  rounded ">
             <button
               type="button"
               className=" w-5 sm:w-10 h-10 leading-10 text-gray-600 dark:bg-white transition hover:opacity-75"
+              onClick={()=> { 
+                //setQuantity(qty -1);
+                decQty() }}
+              disabled = { qty == 0 || product.quantity == 0 }
             >
               &minus;
+       
+             
             </button>
 
             <input
               type="number"
               id="Quantity"
-              defaultValue="1"
-              className="h-10 w-9 sm:w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+              value={qty}
+              disabled = { qty == 0 }
+              className={`h-10 ${ qty == 0 || product.quantity == 0 ? 'text-gray-300' : 'text-black' }  w-12 sm:w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none`}
             />
 
            <button
              type="button"
+             disabled = { product.quantity <= qty }
              className="w-5 sm:w-10 h-10 leading-10 text-gray-600 dark:bg-white transition hover:opacity-75"
+             onClick={()=> {
+               //setQuantity(qty +1);
+               incQty()
+               }}
            > + </button>
+
+
+          
        </div>
-    </div>    
+
+           
+    </div> 
+
+    { (product.quantity == 0 || product.quantity <= qty) && 
+            <div className='ml-3 mr-1 mt-3 text-red-600'>
+             Out of stock
+            </div>   
+          }
+          {console.log(`product Quantity ${product.quantity}  ++  ${qty}`)}
     
         
 
 
-        <button className="flex ml-auto text-white bg-onPrimary border-0 py-2 px-6 focus:outline-none hover:bg-onPrimaryHover rounded">Add To Cart</button>
+        <button
+         className="flex ml-auto text-white bg-onPrimary border-0 py-2 px-6 focus:outline-none hover:bg-onPrimaryHover rounded"
+         onClick={()=> {onAdd(product,qty)}}
+         disabled = {(product.quantity == 0 || product.quantity < qty || qty == 0)}
+        >Add To Cart</button>
         {/* <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
           <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
             <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
@@ -239,7 +282,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Et necessitatibus offic
            <ul className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-4">
  
             {  
-              products4.map((element,index)=> {
+              products.map((element,index)=> {
                 return (
                  <ProductItem key={index} product={element} />
                 )

@@ -3,6 +3,9 @@ import user from './icons/user.svg'
 import wallet from './icons/wallet.svg'
 import favorites from './icons/favorites.svg'
 import logo from './images/logo.png'
+import logout from './icons/logout.svg'
+
+
 import plantBackground from './images/plantBackground.png'
 import bedroom from './images/bedroom.png'
 import dining from './images/dining.png'
@@ -16,6 +19,7 @@ import trophy from './images/featured/trophy.png'
 import warranty from './images/featured/warranty.png'
 
 export {
+    logout,
     search,
     user,
     wallet,

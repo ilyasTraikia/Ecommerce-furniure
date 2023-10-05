@@ -11,7 +11,7 @@ export default function ErrorElement() {
      <h1 className='font-bold text-3xl'>Oops!</h1>
      <p className='mt-4'>Sorry, an unexpected error has occurred.</p>
      <p className='mt-4'>
-      {/* <i>{error.statusText || error.message}</i> */}
+      <i>{error.statusText || error.message}</i>
      </p>
   </div>
   )
