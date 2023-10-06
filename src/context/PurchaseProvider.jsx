@@ -7,6 +7,10 @@ const PurchaseContext = createContext({})
 export const PurchaseProvider = ({children}) => {
 
 
+
+
+
+
     // The state components
     const [showCart, setShowCart] = useState(false);
     const [cartItems, setCartItems] = useState([]);
@@ -14,6 +18,23 @@ export const PurchaseProvider = ({children}) => {
     const [totalQuantities, setTotalQuantities] = useState(0);
     const [qty, setQty] = useState(0);
     console.log(`Qte : ${qty}`)
+ 
+    console.log(`cartItems are : ${JSON.stringify(cartItems)}`)
+
+
+   const [OutOfStockProducts, setOutOfStockProducts] = useState([{id : 0,isOutOfStock :false}])
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -32,53 +53,123 @@ export const PurchaseProvider = ({children}) => {
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // the function to update a cart item if it already exists in the cart
+  function updateCartItem(id, itemAttributes) {
+    var index = cartItems.findIndex(product=> product.id === id);
+    if (index === -1)
+       console.log("Error Here index id -1")
+    else{
+      setCartItems(
+        [
+           ...cartItems.slice(0,index),
+           Object.assign({}, cartItems[index], itemAttributes),
+           ...cartItems.slice(index+1)
+        ]
+      );
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // The function to Add the products to the cart
   const onAdd = (product,quantity) => {
-    console.log(` pROduct id is ${product}`)
+  
     const CheckProductInCart = cartItems.find((item)=> item.id === product.id)
 
     setTotalPrice((prev) => prev + product.price * quantity)
     setTotalQuantities((prev)=> prev + quantity)
 
-
     // If the product already exists in the cart
      if(CheckProductInCart) {
-        const updatedCartItems = cartItems.map((cartProduct) => {
-          if(cartProduct.id === product.id) return {
-            ...cartProduct,
-            quantity: cartProduct.quantity + quantity
-          }
-         }
-    
-         )
-    
-         setCartItems(updatedCartItems)
+        // const updatedCartItems = cartItems.map((cartProduct) => {
+        //   if(cartProduct.id === product.id) return {
+        //     ...cartProduct,
+        //     quantity: cartProduct.quantity + quantity
+   
+        //   }
+        //  }
+        //  )
+        updateCartItem(product.id,{CartQuantity : CheckProductInCart.CartQuantity + quantity})
+        // setCartItems([...cartItems,{...product}])
          // If the product does not already exist in the cart
      } else {
 
     
 
-      setCartItems([...cartItems, {...product}])
+      setCartItems([...cartItems, {...product,quantity:qty,CartQuantity:qty}])
 
      }
      product.quantity = product.quantity - quantity
      toast.success(`${qty} ${product.name} added to the cart.`)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // The function to remove an item from the cart 
+  const onRemove = (product) => {
+    foundProduct = cartItems.find((item) => item._id === product._id);
+    const newCartItems = cartItems.filter((item) => item._id !== product._id);
+
+    setTotalPrice((prevTotalPrice) => prevTotalPrice -foundProduct.price * foundProduct.quantity);
+    setTotalQuantities(prevTotalQuantities => prevTotalQuantities - foundProduct.quantity);
+    setCartItems(newCartItems);
+  }
+
+
+
 
 
 
@@ -99,9 +190,13 @@ export const PurchaseProvider = ({children}) => {
         totalPrice,
         totalQuantities,
         qty,
+        setQty,
         incQty,
         decQty,
-        onAdd
+        OutOfStockProducts,
+        setOutOfStockProducts,
+        onAdd,
+        onRemove
       }} >
      {children}
    </PurchaseContext.Provider>

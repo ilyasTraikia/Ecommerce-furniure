@@ -10,7 +10,7 @@ export default function OffCanvasCartRight() {
 
   return (
 
-<div id="hs-overlay-right" className="hs-overlay hs-overlay-open:translate-x-0 hidden translate-x-full fixed top-0 right-0 transition-all duration-300 transform h-full max-w-xs w-full w-full z-[60] bg-white border-l dark:bg-gray-800 dark:border-gray-700 hidden" tabindex="-1">
+<div id="hs-overlay-right" className="hs-overlay hs-overlay-open:translate-x-0 hidden translate-x-full fixed top-0 right-0 transition-all duration-300 transform h-full max-w-xs w-full w-full z-[60] bg-white border-l dark:bg-gray-800 dark:border-gray-700 hidden" tabIndex="-1">
   <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
     <h3 className="font-bold text-gray-800 dark:text-white">
       Shopping Cart
@@ -28,7 +28,7 @@ export default function OffCanvasCartRight() {
     {/* The Cart content */}
     {/* Checking if the cart is empty show a text else show the content */}
     {
-      cartItems.length < 1 
+      cartItems?.length < 1 
       ? <div>
        Your cart is currently empty.
       </div>
@@ -36,7 +36,7 @@ export default function OffCanvasCartRight() {
       className="relative   max-w-sm py-8 "
       aria-modal="true"
       role="dialog"
-      tabindex="-1"
+      tabIndex="-1"
     >
     
     
@@ -53,7 +53,7 @@ export default function OffCanvasCartRight() {
             />
     
             <div>
-              <h3 className="text-[16px] text-gray-900 dark:text-gray-100">{product.name}</h3>
+              <h3 className="text-[16px] text-gray-900 dark:text-gray-100">{product?.name}</h3>
     
               <dl className="mt-0.5 space-y-px text-[14px] text-gray-600 dark:text-gray-400">
                 <div>
@@ -71,8 +71,8 @@ export default function OffCanvasCartRight() {
 
 
             <div className='flex flex-col'>
-             <div>${product.price}</div>
-             <div>X {qty}</div>
+             <div>${product?.price}</div>
+             <div>X {product.CartQuantity}</div>
             </div>
           </li>
     

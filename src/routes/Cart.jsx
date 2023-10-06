@@ -80,13 +80,14 @@ export default function Cart() {
               </div>
     
               <div className="flex flex-1 items-center justify-end gap-2">
+                <div className='dark:text-gray-300'>${product.price}</div>
                 <form>
                   <label htmlFor="Line1Qty" className="sr-only"> Quantity </label>
     
                   <input
                     type="number"
                     min="1"
-                    value="1"
+                    value={product.CartQuantity}
                     id="Line1Qty"
                     className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                   />
@@ -145,22 +146,22 @@ export default function Cart() {
           <dl className="space-y-0.5 text-sm text-gray-700 dark:text-gray-200">
             <div className="flex justify-between">
               <dt>Subtotal</dt>
-              <dd>£250</dd>
+              <dd>${totalPrice}</dd>
             </div>
 
             <div className="flex justify-between">
               <dt>VAT</dt>
-              <dd>£25</dd>
+              <dd>$0</dd>
             </div>
 
             <div className="flex justify-between">
               <dt>Discount</dt>
-              <dd>-£20</dd>
+              <dd>$0</dd>
             </div>
 
             <div className="flex justify-between !text-base font-medium">
               <dt>Total</dt>
-              <dd>£200</dd>
+              <dd>${totalPrice}</dd>
             </div>
           </dl>
 

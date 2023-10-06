@@ -4,6 +4,7 @@ import { useLoaderData } from 'react-router-dom'
 import useProducts from '../custom hooks/useProducts'
 import usePurchase from '../custom hooks/usePurchase'
 import { useState } from 'react'
+import { useRef ,useEffect} from 'react'
 
 
 
@@ -20,21 +21,48 @@ export default function ProductPage() {
 
   const  product  = useLoaderData().data
   const { products} = useProducts()
+  const [found,setFound] = useState({})
+  const [foundCartItem, setfoundCartItem] = useState({})
+  const [cartClicked, setcartClicked] = useState(false)
 
  
 
   // Getting the purchase context
-  const { incQty, decQty,qty, onAdd} = usePurchase()
-  
-  // useEffect(() => {
-    
-  //   if(Quantity == 0) {
+  const { incQty, decQty,qty, onAdd , OutOfStockProducts, setOutOfStockProducts,setQty,cartItems} = usePurchase()
+  const [QuantityState, setQuantityState] = useState(0)
+ // console.log(`Cart clicked ${cartClicked}`)
+ // console.log(`found is ${JSON.stringify(found)}`)
 
-  //   }
+
+
+
+ 
+
+ // Used to identify whenever we chose enought quantity to make the product in the outOfStock array in the context state
+  useEffect(() => {
+    if((product.quantity == 0 || product.quantity <= QuantityState) && cartClicked) {
+      setOutOfStockProducts([...OutOfStockProducts,{id:product.id,isOutOfStock:true}])
+    }
+  }, [QuantityState,cartClicked])
+
+
+
+
+
+// Used to check if the current product is in the outofStock products in the context state
+  useEffect(()=> {
+   setFound(OutOfStockProducts.find((item)=> {
+   return( item.id == product.id )
+  }))
+
+  setfoundCartItem(cartItems.find((item)=> {
+   return( item.id == product.id)
+  }))
+
+  },[])
   
-   
-  // }, [Quantity])
-  
+
+
 
 
 
@@ -152,9 +180,10 @@ export default function ProductPage() {
               type="button"
               className=" w-5 sm:w-10 h-10 leading-10 text-gray-600 dark:bg-white transition hover:opacity-75"
               onClick={()=> { 
-                //setQuantity(qty -1);
-                decQty() }}
-              disabled = { qty == 0 || product.quantity == 0 }
+                setQuantityState(QuantityState -1);
+                decQty() 
+              }}
+              disabled = { QuantityState == 0 || product.quantity == 0 }
             >
               &minus;
        
@@ -164,17 +193,17 @@ export default function ProductPage() {
             <input
               type="number"
               id="Quantity"
-              value={qty}
-              disabled = { qty == 0 }
-              className={`h-10 ${ qty == 0 || product.quantity == 0 ? 'text-gray-300' : 'text-black' }  w-12 sm:w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none`}
+              value={QuantityState}
+              disabled = { QuantityState == 0 }
+              className={`h-10 ${ QuantityState == 0 || product.quantity == 0 ? 'text-gray-300' : 'text-black' }  w-12 sm:w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none`}
             />
 
            <button
              type="button"
-             disabled = { product.quantity <= qty }
+             disabled = { (product.quantity <= QuantityState || found?.isOutOfStock || foundCartItem?.CartQuantity<= QuantityState ) }
              className="w-5 sm:w-10 h-10 leading-10 text-gray-600 dark:bg-white transition hover:opacity-75"
              onClick={()=> {
-               //setQuantity(qty +1);
+               setQuantityState(QuantityState +1);
                incQty()
                }}
            > + </button>
@@ -185,21 +214,21 @@ export default function ProductPage() {
 
            
     </div> 
-
-    { (product.quantity == 0 || product.quantity <= qty) && 
+          {/* If the product quantity becomes 0 or the product quantity becomes equalt or less to the quantityState in the toggler */}
+          { (product.quantity == 0 || product.quantity <= QuantityState || found?.isOutOfStock || foundCartItem?.CartQuantity<= QuantityState ) && 
             <div className='ml-3 mr-1 mt-3 text-red-600'>
              Out of stock
             </div>   
           }
-          {console.log(`product Quantity ${product.quantity}  ++  ${qty}`)}
+          {console.log(`product Quantity ${foundCartItem?.CartQuantity}  ++  ${QuantityState}`)}
     
         
 
 
         <button
          className="flex ml-auto text-white bg-onPrimary border-0 py-2 px-6 focus:outline-none hover:bg-onPrimaryHover rounded"
-         onClick={()=> {onAdd(product,qty)}}
-         disabled = {(product.quantity == 0 || product.quantity < qty || qty == 0)}
+         onClick={()=> {onAdd(product,QuantityState);setcartClicked(true);setQuantityState(0);setQty(0)}}
+         disabled = {(product.quantity == 0 || product.quantity < QuantityState || QuantityState == 0 || found?.isOutOfStock)}
         >Add To Cart</button>
         {/* <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
           <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
