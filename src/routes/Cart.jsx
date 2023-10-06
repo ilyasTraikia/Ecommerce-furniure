@@ -6,7 +6,7 @@ export default function Cart() {
 
 
 
-    const {totalPrice,cartItems,totalQuantities} = usePurchase()
+    const {totalPrice,cartItems,totalQuantities,onRemove} = usePurchase()
 
 
 
@@ -93,7 +93,10 @@ export default function Cart() {
                   />
                 </form>
     
-                <button className="text-gray-600 dark:text-gray-200 transition hover:text-red-600">
+                <button
+                className="text-gray-600 dark:text-gray-200 transition hover:text-red-600" 
+                onClick={()=> { onRemove(product)}}
+                >
                   <span className="sr-only">Remove item</span>
     
                   <svg

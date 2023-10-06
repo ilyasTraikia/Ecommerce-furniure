@@ -23,6 +23,13 @@ export const PurchaseProvider = ({children}) => {
 
 
    const [OutOfStockProducts, setOutOfStockProducts] = useState([{id : 0,isOutOfStock :false}])
+   console.log(`out of Stock products Rn are : ${JSON.stringify(OutOfStockProducts)}`)
+
+
+
+
+   let foundProduct;
+   let foundOutOfStockProduct;
 
 
 
@@ -160,11 +167,15 @@ export const PurchaseProvider = ({children}) => {
 
   // The function to remove an item from the cart 
   const onRemove = (product) => {
-    foundProduct = cartItems.find((item) => item._id === product._id);
-    const newCartItems = cartItems.filter((item) => item._id !== product._id);
+    foundProduct = cartItems.find((item) => item.id === product.id);
+    const newCartItems = cartItems.filter((item) => item.id !== product.id);
+    
+   
+    const newOutOfStockItems = OutOfStockProducts.filter((item) => item.id !== product.id);
+    setOutOfStockProducts(newOutOfStockItems)
 
-    setTotalPrice((prevTotalPrice) => prevTotalPrice -foundProduct.price * foundProduct.quantity);
-    setTotalQuantities(prevTotalQuantities => prevTotalQuantities - foundProduct.quantity);
+    setTotalPrice((prevTotalPrice) => prevTotalPrice -foundProduct.price * foundProduct.CartQuantity);
+    setTotalQuantities(prevTotalQuantities => prevTotalQuantities - foundProduct.CartQuantity);
     setCartItems(newCartItems);
   }
 

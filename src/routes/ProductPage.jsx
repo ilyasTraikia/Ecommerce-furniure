@@ -200,7 +200,7 @@ export default function ProductPage() {
 
            <button
              type="button"
-             disabled = { (product.quantity <= QuantityState || found?.isOutOfStock || foundCartItem?.CartQuantity<= QuantityState ) }
+             disabled = { (product.quantity <= QuantityState || found?.isOutOfStock ||  product.quantity - foundCartItem?.CartQuantity<= QuantityState) }
              className="w-5 sm:w-10 h-10 leading-10 text-gray-600 dark:bg-white transition hover:opacity-75"
              onClick={()=> {
                setQuantityState(QuantityState +1);
@@ -215,12 +215,13 @@ export default function ProductPage() {
            
     </div> 
           {/* If the product quantity becomes 0 or the product quantity becomes equalt or less to the quantityState in the toggler */}
-          { (product.quantity == 0 || product.quantity <= QuantityState || found?.isOutOfStock || foundCartItem?.CartQuantity<= QuantityState ) && 
+          { (product.quantity == 0 || product.quantity <= QuantityState || found?.isOutOfStock || product.quantity - foundCartItem?.CartQuantity<= QuantityState ) && 
             <div className='ml-3 mr-1 mt-3 text-red-600'>
              Out of stock
             </div>   
           }
           {console.log(`product Quantity ${foundCartItem?.CartQuantity}  ++  ${QuantityState}`)}
+          {console.log(` the equation  ${product.quantity - foundCartItem?.CartQuantity<= QuantityState} and is outOfStock ${ found?.isOutOfStock}  and  2  ${product.quantity <= QuantityState}  and 1 ${product.quantity == 0} `)}
     
         
 
