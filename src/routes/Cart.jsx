@@ -1,6 +1,8 @@
 import React from 'react'
 import { shopBackground,Syltherine,shipping,support,trophy,warranty } from '../assets'
 import usePurchase from '../custom hooks/usePurchase'
+import { axiosPrivate } from '../api/axios'
+import toast from 'react-hot-toast'
 
 export default function Cart() {
 
@@ -8,6 +10,24 @@ export default function Cart() {
 
     const {totalPrice,cartItems,totalQuantities,onRemove} = usePurchase()
 
+
+    const handleCheckout = async () => {
+
+        const response = await axiosPrivate.post('/create-checkout-session', {
+          CartItems :  JSON.stringify(cartItems)
+        })
+
+        if(response.statusCode === 500) return
+
+        const data = response.json()
+
+        console.log(`data is  ${data}`)
+
+        toast.loading('Redirecting...')
+
+    }
+
+    
 
 
   return (
@@ -172,7 +192,7 @@ export default function Cart() {
 
           <div className="flex justify-end">
             <button
-          
+               onClick={handleCheckout}
               className="block rounded bg-onPrimary px-5 py-3 text-sm text-gray-100 transition hover:bg-onPrimaryHover"
             >
               Checkout
