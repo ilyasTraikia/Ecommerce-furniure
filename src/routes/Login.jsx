@@ -64,6 +64,8 @@ export default function Login() {
   
         const accessToken = response?.data?.token;
         const roles = response?.data?.roles;
+
+        console.log(accessToken)
        
       
       

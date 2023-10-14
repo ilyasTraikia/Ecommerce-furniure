@@ -1,31 +1,41 @@
 import React from 'react'
 import { shopBackground,Syltherine,shipping,support,trophy,warranty } from '../assets'
 import usePurchase from '../custom hooks/usePurchase'
-import { axiosPrivate } from '../api/axios'
+import { axiosPrivate,axiosPrivateTwo } from '../api/axios'
 import toast from 'react-hot-toast'
+import axios from 'axios'
+
 
 export default function Cart() {
 
-
+  
 
     const {totalPrice,cartItems,totalQuantities,onRemove} = usePurchase()
 
 
-    const handleCheckout = async () => {
+    // const handleCheckout = async () => {
 
-        const response = await axiosPrivate.post('/create-checkout-session', {
-          CartItems :  JSON.stringify(cartItems)
-        })
+    //    try {
+    //     const response = await axiosPrivate.post('/create-checkout-session', {
+    //       CartItems :  JSON.stringify(cartItems)
+    //     })
 
-        if(response.statusCode === 500) return
+    //     if(response.statusCode === 500) return
 
-        const data = response.json()
+    //     const data = JSON.stringify(response)
 
-        console.log(`data is  ${data}`)
+    //     console.log(`data is  ${data.data}`)
 
-        toast.loading('Redirecting...')
+    //     toast.loading('Redirecting...')
 
-    }
+    //     // stripe.redirectToCheckout({sessionId: })
+
+    //    } catch(err) {
+    //      console.log(`error is ${err}`)
+    //    }
+       
+
+    // }
 
     
 
@@ -191,12 +201,20 @@ export default function Cart() {
         
 
           <div className="flex justify-end">
-            <button
+            {/* <button
                onClick={handleCheckout}
               className="block rounded bg-onPrimary px-5 py-3 text-sm text-gray-100 transition hover:bg-onPrimaryHover"
             >
               Checkout
-            </button>
+            </button> */}
+            <form action="https://localhost:7269/create-checkout-session" method="POST">
+              <button 
+              type="submit"
+              className="block rounded bg-onPrimary px-5 py-3 text-sm text-gray-100 transition hover:bg-onPrimaryHover"
+              >
+                Checkout
+              </button>
+            </form>
           </div>
         </div>
       </div>
