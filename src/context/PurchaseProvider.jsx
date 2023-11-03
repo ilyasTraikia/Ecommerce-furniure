@@ -23,7 +23,7 @@ export const PurchaseProvider = ({children}) => {
 
 
    const [OutOfStockProducts, setOutOfStockProducts] = useState([{id : 0,isOutOfStock :false}])
-   console.log(`out of Stock products Rn are : ${JSON.stringify(OutOfStockProducts)}`)
+  // console.log(`out of Stock products Rn are : ${JSON.stringify(OutOfStockProducts)}`)
 
 
 
@@ -139,7 +139,7 @@ export const PurchaseProvider = ({children}) => {
 
     
 
-      setCartItems([...cartItems, {...product,quantity:qty,CartQuantity:qty}])
+      setCartItems([...cartItems, {...product,quantity:qty,CartQuantity:qty,OriginalQuantity:product.quantity}])
 
      }
      product.quantity = product.quantity - quantity

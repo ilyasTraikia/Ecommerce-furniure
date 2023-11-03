@@ -12,6 +12,8 @@ export default function Cart() {
 
     const {totalPrice,cartItems,totalQuantities,onRemove} = usePurchase()
 
+    console.log(`in the Cart page ,  ${JSON.stringify(cartItems)}`)
+
 
     // const handleCheckout = async () => {
 
@@ -207,7 +209,14 @@ export default function Cart() {
             >
               Checkout
             </button> */}
-            <form action="https://localhost:7269/create-checkout-session" method="POST">
+            <form action="https://localhost:7269/create-checkout-session" method="POST" enctype="application/x-www-form-urlencoded" >
+
+          
+               {/* Add hidden input fields for each item in the cart */}
+               <input type="hidden" name="cartProducts" value={JSON.stringify(cartItems)} />
+               <input type="hidden" name="test" value="testValue" />
+
+
               <button 
               type="submit"
               className="block rounded bg-onPrimary px-5 py-3 text-sm text-gray-100 transition hover:bg-onPrimaryHover"

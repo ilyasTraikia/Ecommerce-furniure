@@ -12,12 +12,16 @@ export async function loader({ params }) {
   // if(params.productId <= 5 ) {
   //   throw new Error("error")
   // }
+
   const product = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${params.productId}`)
   return  product;
 }
 
 
 export default function ProductPage() {
+
+
+ 
 
   const  product  = useLoaderData().data
   const { products} = useProducts()
@@ -33,6 +37,11 @@ export default function ProductPage() {
  // console.log(`Cart clicked ${cartClicked}`)
  // console.log(`found is ${JSON.stringify(found)}`)
 
+
+ // Reset the global quantity to 0 after we navigate to a component
+ useEffect(()=> {
+  setQty(0)
+ },[])
 
 
 
@@ -221,7 +230,7 @@ export default function ProductPage() {
             </div>   
           }
           {console.log(`product Quantity ${foundCartItem?.CartQuantity}  ++  ${QuantityState}`)}
-          {console.log(` the equation  ${product.quantity - foundCartItem?.CartQuantity<= QuantityState} and is outOfStock ${ found?.isOutOfStock}  and  2  ${product.quantity <= QuantityState}  and 1 ${product.quantity == 0} `)}
+        
     
         
 

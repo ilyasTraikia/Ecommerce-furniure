@@ -6,12 +6,15 @@ import {Toaster} from 'react-hot-toast'
 import OffCanvasCartRight from '../components/OffCanvasCartRight';
 import { createPortal } from 'react-dom';
 import usePurchase from '../custom hooks/usePurchase';
+import { useEffect } from 'react';
 
 
 function App() {
 
   const navigation = useNavigation()
-  const {totalQuantities} = usePurchase()
+  const {totalQuantities,cartItems} = usePurchase()
+
+
 
   return (
 
@@ -34,6 +37,7 @@ function App() {
       <Footer />
 
    
+      
       
 
 
